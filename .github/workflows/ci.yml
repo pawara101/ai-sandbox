@@ -1,0 +1,39 @@
+name: Python CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "LLM-Huggingface-food-classifier/**"
+      - ".github/workflows/ci.yml"
+  pull_request:
+    paths:
+      - "LLM-Huggingface-food-classifier/**"
+      - ".github/workflows/ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: LLM-Huggingface-food-classifier
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: LLM-Huggingface-food-classifier/requirements.txt
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Compile Python files
+        run: python -m py_compile app.py model.py

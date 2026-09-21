@@ -1,0 +1,9 @@
+torch==2.5.1
+transformers==4.46.3
+datasets==3.1.0
+Pillow==11.0.0
+numpy==1.26.4
+scikit-learn==1.5.2
+accelerate==1.0.1
+gradio==5.5.0
+evaluate==0.7.0
